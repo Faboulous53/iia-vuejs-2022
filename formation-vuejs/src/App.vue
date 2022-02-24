@@ -3,11 +3,20 @@
     <img alt="Vue logo" src="./assets/logo.png">
     
     <div>
+      <h1>Intro</h1>
+
       Hello {{ utilisateur.username }}, vous avez {{ utilisateur.age }} ans !
       <div>
         <input type="text" v-model="utilisateur.username" />
         <input type="number" v-model="utilisateur.age" />
       </div>
+
+      <!-- v-bind:attrName -->
+      <!-- :attrName -->
+      <!-- <p v-bind:class="utilisateur.username"> -->
+      <p :class="{ 'demo-bind': utilisateur.username === 'jeremy' }">
+        Un texte en exemple qui changera de couleur.
+      </p>
 
       <!-- v-on:eventName -->
       <!-- @eventName -->
@@ -21,6 +30,55 @@
       <p v-else>Mineur</p>
 
       <p>{{ strMajeur() }}</p>
+
+      <hr />
+
+      <h1>Boucles</h1>
+      Un prénom => {{ prenoms[0] }}
+
+      <button @click="ajouterPrenom()">Ajouter un prénom</button>
+
+      <ul>
+        <li v-for="prenom of prenoms" v-bind:key="prenom">
+          {{ prenom }}
+        </li>
+      </ul>
+
+      <hr />
+
+      <h1>Liste des utilisateurs</h1>
+
+      <div>
+        <label>Nom d'utilisateur</label>
+        <input type="text" v-model="utilisateur.username" />
+      </div>
+
+      <div>
+        <label>Age</label>
+        <input type="number" v-model="utilisateur.age" />
+      </div>
+
+      <div>
+        <button @click="ajouterUtilisateur()">Ajouter l'utilisateur</button>
+      </div>
+
+
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Age</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr v-for="user of utilisateurs" :key="user.username">
+            <td>{{ user.username }}</td>
+            <td>{{ user.age }}</td>
+          </tr>
+        </tbody>
+      </table>
+
     </div>
   </div>
 </template>
@@ -37,7 +95,17 @@ export default {
       utilisateur: {
         username: "Jérémy",
         age: 28
-      }
+      },
+
+      prenoms: [
+        "Marion", "Mickael", "Aurélie", "Delphine"
+      ],
+
+      utilisateurs: [
+        { username: "Toto",   age: 20 },
+        { username: "Albert", age: 25 },
+        { username: "Jérôme", age: 30 }
+      ]
     }
   },
 
@@ -46,7 +114,7 @@ export default {
     demoClick() {
       // alert("On a cliqué ici ...");
       // Accès au contexte du fichier Vue avec le mot-clé 'this'
-      this.utilisateur.username = "Défaut";
+      this.utilisateur.username = "";
     },
 
     resetAge(age) {
@@ -65,6 +133,25 @@ export default {
       // return "MINEUR";
 
       return (this.utilisateur.age >= 18) ? "MAJEUR" : "MINEUR";
+    },
+
+    ajouterPrenom() {
+      this.prenoms.push(this.utilisateur.username);
+
+      //Reset le "form"
+      this.demoClick();
+      // this.utilisateur.username = "";
+    },
+
+    ajouterUtilisateur() {
+      // this.utilisateurs.push({
+      //   username: this.utilisateur.username,
+      //   age: this.utilisateur.age
+      // });
+
+      // this.utilisateurs.push(this.utilisateur);
+      // On va lui demander de faire une copie des attributs
+      this.utilisateurs.push({ ...this.utilisateur });
     }
   }
 }
@@ -79,4 +166,10 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.demo-bind {
+  color: red;
+}
+
+
 </style>
