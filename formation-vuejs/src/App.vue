@@ -87,13 +87,25 @@
         </tbody>
       </table>
 
+      <hr />
+
+      <h1>Composant</h1>
+
+      <message :msg="utilisateurs[0].username" />
+
     </div>
   </div>
 </template>
 
 <script>
+import Message from './components/MessageComponent.vue';
+
 export default {
   name: 'App',
+
+  components: {
+    Message
+  },
   
   // data => Données
   data() {
