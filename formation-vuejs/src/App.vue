@@ -58,8 +58,12 @@
         <input type="number" v-model="utilisateur.age" />
       </div>
 
-      <div>
+      <!-- <div v-if="utilisateur.username.length >= 5 && utilisateur.age > 0">
         <button @click="ajouterUtilisateur()">Ajouter l'utilisateur</button>
+      </div> -->
+
+      <div>
+        <button :disabled="!utilisateur.username || utilisateur.age <= 0" @click="ajouterUtilisateur()">Ajouter l'utilisateur</button>
       </div>
 
 
@@ -68,6 +72,7 @@
           <tr>
             <th>Nom</th>
             <th>Age</th>
+            <th></th>
           </tr>
         </thead>
 
@@ -75,6 +80,9 @@
           <tr v-for="user of utilisateurs" :key="user.username">
             <td>{{ user.username }}</td>
             <td>{{ user.age }}</td>
+            <td>
+              <button @click="supprimerUtilisateur(user)">Supprimer</button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -152,6 +160,13 @@ export default {
       // this.utilisateurs.push(this.utilisateur);
       // On va lui demander de faire une copie des attributs
       this.utilisateurs.push({ ...this.utilisateur });
+    },
+
+    supprimerUtilisateur(user) {
+      let index = this.utilisateurs.indexOf(user);
+
+      // On supprime 1 utilisateur, à partir de l'index
+      this.utilisateurs.splice(index, 1);
     }
   }
 }
