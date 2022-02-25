@@ -20,12 +20,15 @@ export default {
 
 	data() {
 		return {
-			todos: [
-				{ id: 1, title: "OK", completed: false },
-				{ id: 2, title: "OK 2", completed: true },
-				{ id: 3, title: "OK 3", completed: false },
-			]
+			todos: []
 		}
+	},
+
+	async mounted() {
+		let result = await fetch('https://jsonplaceholder.typicode.com/todos');
+		let todos = await result.json();
+
+		this.todos = todos;
 	}
 }
 </script>
