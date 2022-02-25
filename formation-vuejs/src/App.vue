@@ -46,28 +46,11 @@
 
       <hr />
 
-      <h1>Liste des utilisateurs</h1>
-
-      <div>
-        <label>Nom d'utilisateur</label>
-        <input type="text" v-model="utilisateur.username" />
-      </div>
-
-      <div>
-        <label>Age</label>
-        <input type="number" v-model="utilisateur.age" />
-      </div>
-
-      <!-- <div v-if="utilisateur.username.length >= 5 && utilisateur.age > 0">
-        <button @click="ajouterUtilisateur()">Ajouter l'utilisateur</button>
-      </div> -->
-
-      <div>
-        <button :disabled="!utilisateur.username || utilisateur.age <= 0" @click="ajouterUtilisateur()">Ajouter l'utilisateur</button>
-      </div>
-
       <!-- Composant :propName="objetConnu" -->
-      <crud-utilisateur :utilisateurs="utilisateurs" />
+      <crud-utilisateur
+        :utilisateurs="utilisateurs"
+        @ajout="ajouterUtilisateur"
+        @supprime="supprimerUtilisateur" />
 
       <hr />
 
@@ -146,15 +129,9 @@ export default {
       // this.utilisateur.username = "";
     },
 
-    ajouterUtilisateur() {
-      // this.utilisateurs.push({
-      //   username: this.utilisateur.username,
-      //   age: this.utilisateur.age
-      // });
-
-      // this.utilisateurs.push(this.utilisateur);
+    ajouterUtilisateur(user) {
       // On va lui demander de faire une copie des attributs
-      this.utilisateurs.push({ ...this.utilisateur });
+      this.utilisateurs.push({ ...user });
     },
 
     supprimerUtilisateur(user) {
