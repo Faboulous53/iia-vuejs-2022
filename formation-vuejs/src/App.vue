@@ -66,26 +66,8 @@
         <button :disabled="!utilisateur.username || utilisateur.age <= 0" @click="ajouterUtilisateur()">Ajouter l'utilisateur</button>
       </div>
 
-
-      <table>
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Age</th>
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr v-for="user of utilisateurs" :key="user.username">
-            <td>{{ user.username }}</td>
-            <td>{{ user.age }}</td>
-            <td>
-              <button @click="supprimerUtilisateur(user)">Supprimer</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- Composant :propName="objetConnu" -->
+      <crud-utilisateur :utilisateurs="utilisateurs" />
 
       <hr />
 
@@ -99,12 +81,13 @@
 
 <script>
 import Message from './components/MessageComponent.vue';
+import CrudUtilisateur from './components/CrudUtilisateurComponent.vue';
 
 export default {
   name: 'App',
 
   components: {
-    Message
+    Message, CrudUtilisateur
   },
   
   // data => Données
