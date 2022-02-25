@@ -58,6 +58,9 @@
 
       <message :msg="utilisateurs[0].username" />
 
+      <hr />
+
+      <color-picker @changement="changementCouleur" />
     </div>
   </div>
 </template>
@@ -65,12 +68,13 @@
 <script>
 import Message from './components/MessageComponent.vue';
 import CrudUtilisateur from './components/CrudUtilisateurComponent.vue';
+import ColorPicker from './components/ColorPickerComponent.vue';
 
 export default {
   name: 'App',
 
   components: {
-    Message, CrudUtilisateur
+    Message, CrudUtilisateur, ColorPicker
   },
   
   // data => Données
@@ -139,6 +143,10 @@ export default {
 
       // On supprime 1 utilisateur, à partir de l'index
       this.utilisateurs.splice(index, 1);
+    },
+
+    changementCouleur(couleur) {
+      alert('Changement ! La couleur sélectionnée est : ' + couleur);
     }
   }
 }
