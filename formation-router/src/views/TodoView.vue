@@ -29,6 +29,12 @@ export default {
 		let todos = await result.json();
 
 		this.todos = todos;
-	}
+	},
+
+	// mounted() {
+	// 	fetch('https://jsonplaceholder.typicode.com/todos')
+	// 	.then(result => result.json())
+	// 	.then(todos => this.todos = todos);
+	// }
 }
 </script>
