@@ -3,6 +3,7 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/demo">Demo</router-link> |
     <router-link to="/todo">Todo list</router-link> |
+    <router-link to="/photo">Liste des photos</router-link> |
     <router-link to="/about">About</router-link>
   </div>
 
